@@ -26,7 +26,7 @@ class MessageController(
     fun getMessageBySenderForRecipient(
         @PathVariable senderId: String,
         @PathVariable recipientId: String,
-        @RequestAttribute limit: Boolean
+        @RequestParam limit: Boolean
     ) : List<MessageDocument> {
         return messageService.getMessageBySenderForRecipient(senderId,recipientId,limit)
     }
@@ -34,7 +34,7 @@ class MessageController(
     @GetMapping("/message/recipient/{recipientId}")
     fun getMessageForRecipient(
         @PathVariable recipientId: String,
-        @RequestAttribute limit: Boolean
+        @RequestParam limit: Boolean
     ) : List<MessageDocument> {
         return messageService.getMessageForRecipient(recipientId,limit)
     }
