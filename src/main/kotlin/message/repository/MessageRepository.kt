@@ -29,10 +29,8 @@ class MessageRepository(
     : List<MessageDocument> {
         val getMessagesBySenderAndRecipientIdCriteria = Criteria.where(SENDER_ID).isEqualTo(senderId)
             .and(RECIPIENT_ID).isEqualTo(recipientId)
-        val getMessagesBySenderAndRecipientIdQuery = Query().addCriteria(getMessagesBySenderAndRecipientIdCriteria)
-        if (limit) {
-            getMessagesBySenderAndRecipientIdQuery.limit(LIMIT_SIZE)
-        }
+        val getMessagesBySenderAndRecipientIdQuery =
+            buildQueryForLimitOrRecentMessages(limit,getMessagesBySenderAndRecipientIdCriteria)
         return mongoTemplate.find(getMessagesBySenderAndRecipientIdQuery, MessageDocument::class.java)
     }
 
@@ -42,18 +40,22 @@ class MessageRepository(
     : List<MessageDocument> {
         val getMessagesByRecipientIdCriteria = Criteria.where(RECIPIENT_ID).isEqualTo(recipientId)
 
+        val getMessagesByRecipientIdQuery =
+            buildQueryForLimitOrRecentMessages(limit,getMessagesByRecipientIdCriteria)
+        return mongoTemplate.find(getMessagesByRecipientIdQuery, MessageDocument::class.java)
+    }
+
+    private fun buildQueryForLimitOrRecentMessages(limit: Boolean, queryCriteria: Criteria): Query {
+
         //If limit, set query to limits by 100 (limit_size)
         //if not limit, add to criteria to make sure we only get last month of messages
-        val getMessagesByRecipientIdQuery =
-            if (limit) {
-                Query().addCriteria(messageInLastMonthCriteria).limit(LIMIT_SIZE)
-            }
-            else {
-                getMessagesByRecipientIdCriteria.and(Instant.now().toString())
-                    .gte(Instant.now().minus(1,ChronoUnit.MONTHS))
-                Query().addCriteria(getMessagesByRecipientIdCriteria)
-            }
-        return mongoTemplate.find(getMessagesByRecipientIdQuery, MessageDocument::class.java)
+        return if (limit) {
+            Query().addCriteria(queryCriteria).limit(LIMIT_SIZE)
+        } else {
+            queryCriteria.and(Instant.now().toString())
+                .gte(Instant.now().minus(1,ChronoUnit.MONTHS))
+            Query().addCriteria(queryCriteria)
+        }
     }
 
     //Define MongoDB document field names here to use everywhere to be consistent with naming
