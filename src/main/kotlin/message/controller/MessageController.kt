@@ -12,14 +12,17 @@ class MessageController {
     }
 
     @PostMapping("/message")
-    fun sendMessage(@RequestBody message: Message): Message {
+    fun sendMessage(
+        @RequestBody message: Message
+    ): Message {
         return message
     }
 
     @GetMapping("/message/sender/{senderId}/recipient/{recipientId}")
     fun getMessageBySenderForRecipient(
         @PathVariable senderId: String,
-        @PathVariable recipientId: String
+        @PathVariable recipientId: String,
+        @RequestAttribute limit: Boolean
     ) : List<Message> {
         return listOf(Message(senderId,recipientId,"holdere"))
     }
@@ -27,12 +30,15 @@ class MessageController {
     @GetMapping("/message/sender/{senderId}")
     fun getMessageBySender(
         @PathVariable senderId: String,
+        @RequestAttribute limit: Boolean
     ) : List<Message> {
         return listOf(Message(senderId,"recipient","holdere"))
     }
 
     @GetMapping("/message")
-    fun getAllMessages(): List<Message>{
+    fun getAllMessages(
+        @RequestAttribute limit: Boolean
+    ): List<Message>{
         return listOf(Message("senderId","recipient","holdere"))
     }
 
