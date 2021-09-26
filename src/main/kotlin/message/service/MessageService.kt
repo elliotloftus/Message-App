@@ -1,33 +1,35 @@
 package message.service
 
+import message.model.MessageDocument
 import message.model.MessageRequest
+import message.repository.MessageRepository
 import message.repository.MongoMessageInterface
 import org.springframework.stereotype.Service
 
 @Service
 class MessageService(
-    private val mongoMessageInterface: MongoMessageInterface
+    private val messageRepository: MessageRepository
 ) {
 
     fun sendMessage(
         messageRequest: MessageRequest
-    ): MessageRequest {
-        return messageRequest
+    ): MessageDocument {
+        return messageRepository.saveMessage(messageRequest)
     }
 
     fun getMessageBySenderForRecipient(
         senderId: String,
         recipientId: String,
         limit: Boolean
-    ) : List<MessageRequest> {
-        return listOf(MessageRequest(senderId,recipientId,"holdere"))
+    ) : List<MessageDocument> {
+        return messageRepository.getMessagesBySenderAndRecipientIdId(senderId,recipientId)
     }
 
-    fun getMessageBySender(
-        senderId: String,
+    fun getMessageForRecipient(
+        recipientId: String,
         limit: Boolean
-    ) : List<MessageRequest> {
-        return listOf(MessageRequest(senderId,"recipient","holdere"))
+    ) : List<MessageDocument> {
+        return messageRepository.getMessagesByRecipientId(recipientId)
     }
 
     fun getAllMessages(

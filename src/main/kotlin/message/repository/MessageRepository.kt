@@ -13,24 +13,24 @@ class MessageRepository(
     val mongoTemplate: MongoTemplate
 ) {
 
-    fun saveMessage(message: MessageRequest) {
+    fun saveMessage(message: MessageRequest): MessageDocument {
 
         val messageToSave = MessageDocument(id = null,senderId = message.senderId, recipientId = message.recipientId,
             content = message.content, sentAt = System.currentTimeMillis().toString())
-        mongoTemplate.insert(messageToSave)
+       return mongoTemplate.insert(messageToSave)
     }
 
-    fun getMessagesBySenderAndRecipientIdId(senderId: String, recipientId: String) {
+    fun getMessagesBySenderAndRecipientIdId(senderId: String, recipientId: String) : List<MessageDocument> {
         val getMessagesBySenderAndRecipientIdCriteria = Criteria.where(SENDER_ID).isEqualTo(senderId)
             .and(RECIPIENT_ID).isEqualTo(recipientId)
         val getMessagesBySenderAndRecipientIdQuery = Query().addCriteria(getMessagesBySenderAndRecipientIdCriteria)
-        mongoTemplate.find(getMessagesBySenderAndRecipientIdQuery, MessageDocument::class.java)
+        return mongoTemplate.find(getMessagesBySenderAndRecipientIdQuery, MessageDocument::class.java)
     }
 
-    fun getMessagesByRecipientId(recipientId: String) {
+    fun getMessagesByRecipientId(recipientId: String): List<MessageDocument> {
         val getMessagesByRecipientIdCriteria = Criteria.where(RECIPIENT_ID).isEqualTo(recipientId)
         val getMessagesByRecipientIdQuery = Query().addCriteria(getMessagesByRecipientIdCriteria)
-        mongoTemplate.find(getMessagesByRecipientIdQuery, MessageDocument::class.java)
+        return mongoTemplate.find(getMessagesByRecipientIdQuery, MessageDocument::class.java)
     }
 
     //Define MongoDB document field names here to use everywhere to be consistent with naming

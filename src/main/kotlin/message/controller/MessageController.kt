@@ -1,5 +1,6 @@
 package message.controller
 
+import message.model.MessageDocument
 import message.model.MessageRequest
 import message.service.MessageService
 import org.springframework.web.bind.annotation.*
@@ -17,7 +18,7 @@ class MessageController(
     @PostMapping("/message")
     fun sendMessage(
         @RequestBody messageRequest: MessageRequest
-    ): MessageRequest {
+    ): MessageDocument {
         return messageService.sendMessage(messageRequest)
     }
 
@@ -26,16 +27,16 @@ class MessageController(
         @PathVariable senderId: String,
         @PathVariable recipientId: String,
         @RequestAttribute limit: Boolean
-    ) : List<MessageRequest> {
+    ) : List<MessageDocument> {
         return messageService.getMessageBySenderForRecipient(senderId,recipientId,limit)
     }
 
-    @GetMapping("/message/sender/{senderId}")
-    fun getMessageBySender(
-        @PathVariable senderId: String,
+    @GetMapping("/message/recipient/{recipientId}")
+    fun getMessageForRecipient(
+        @PathVariable recipientId: String,
         @RequestAttribute limit: Boolean
-    ) : List<MessageRequest> {
-        return messageService.getMessageBySender(senderId,limit)
+    ) : List<MessageDocument> {
+        return messageService.getMessageForRecipient(recipientId,limit)
     }
 
     @GetMapping("/message")
