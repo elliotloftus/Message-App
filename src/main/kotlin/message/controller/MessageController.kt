@@ -1,10 +1,13 @@
 package message.controller
 
 import message.model.Message
+import message.service.MessageService
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class MessageController {
+class MessageController(
+    val messageService: MessageService
+) {
 
     @GetMapping("/hello")
     fun placeholderHello(): String {
@@ -15,7 +18,7 @@ class MessageController {
     fun sendMessage(
         @RequestBody message: Message
     ): Message {
-        return message
+        return messageService.sendMessage(message)
     }
 
     @GetMapping("/message/sender/{senderId}/recipient/{recipientId}")
@@ -24,7 +27,7 @@ class MessageController {
         @PathVariable recipientId: String,
         @RequestAttribute limit: Boolean
     ) : List<Message> {
-        return listOf(Message(senderId,recipientId,"holdere"))
+        return messageService.getMessageBySenderForRecipient(senderId,recipientId,limit)
     }
 
     @GetMapping("/message/sender/{senderId}")
@@ -32,14 +35,14 @@ class MessageController {
         @PathVariable senderId: String,
         @RequestAttribute limit: Boolean
     ) : List<Message> {
-        return listOf(Message(senderId,"recipient","holdere"))
+        return messageService.getMessageBySender(senderId,limit)
     }
 
     @GetMapping("/message")
     fun getAllMessages(
         @RequestAttribute limit: Boolean
     ): List<Message>{
-        return listOf(Message("senderId","recipient","holdere"))
+        return messageService.getAllMessages(limit)
     }
 
 
