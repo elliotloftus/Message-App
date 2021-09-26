@@ -42,7 +42,7 @@ class MessageController(
     @GetMapping("/message")
     fun getAllMessages(
         @RequestAttribute limit: Boolean
-    ): List<MessageRequest>{
+    ): List<MessageDocument> {
         return messageService.getAllMessages(limit)
     }
 

@@ -36,13 +36,20 @@ class MessageRepository(
 
     fun getMessagesByRecipientId(
         recipientId: String,
-        limit: Boolean)
-    : List<MessageDocument> {
+        limit: Boolean
+    ) : List<MessageDocument> {
         val getMessagesByRecipientIdCriteria = Criteria.where(RECIPIENT_ID).isEqualTo(recipientId)
 
         val getMessagesByRecipientIdQuery =
             buildQueryForLimitOrRecentMessages(limit,getMessagesByRecipientIdCriteria)
         return mongoTemplate.find(getMessagesByRecipientIdQuery, MessageDocument::class.java)
+    }
+
+    fun getMessagesForEveryone(
+        limit: Boolean
+    ) : List<MessageDocument> {
+        val messagesForEveryone = buildQueryForLimitOrRecentMessages(limit, Criteria())
+        return mongoTemplate.find(messagesForEveryone, MessageDocument::class.java)
     }
 
     private fun buildQueryForLimitOrRecentMessages(limit: Boolean, queryCriteria: Criteria): Query {

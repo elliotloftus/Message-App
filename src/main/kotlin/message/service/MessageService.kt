@@ -34,7 +34,7 @@ class MessageService(
 
     fun getAllMessages(
         limit: Boolean
-    ): List<MessageRequest>{
-        return listOf(MessageRequest("senderId","recipient","holdere"))
+    ): List<MessageDocument> {
+        return messageRepository.getMessagesForEveryone(limit)
     }
 }
