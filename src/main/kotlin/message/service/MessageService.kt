@@ -22,14 +22,14 @@ class MessageService(
         recipientId: String,
         limit: Boolean
     ) : List<MessageDocument> {
-        return messageRepository.getMessagesBySenderAndRecipientIdId(senderId,recipientId)
+        return messageRepository.getMessagesBySenderAndRecipientIdId(senderId,recipientId,limit)
     }
 
     fun getMessageForRecipient(
         recipientId: String,
         limit: Boolean
     ) : List<MessageDocument> {
-        return messageRepository.getMessagesByRecipientId(recipientId)
+        return messageRepository.getMessagesByRecipientId(recipientId,limit)
     }
 
     fun getAllMessages(

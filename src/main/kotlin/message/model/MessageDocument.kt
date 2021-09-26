@@ -9,9 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Field
 @Document
 data class MessageDocument(
 
-    //unique id mongodb assings to each document
+    //unique id mongodb assigns to each document
     @Id
-    @Field(MessageRepository.ID)
     val id: String? = null,
 
     @Field(MessageRepository.SENDER_ID)
