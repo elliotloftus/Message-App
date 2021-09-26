@@ -1,12 +1,12 @@
 package message.controller
 
-import message.model.Message
+import message.model.MessageRequest
 import message.service.MessageService
 import org.springframework.web.bind.annotation.*
 
 @RestController
 class MessageController(
-    val messageService: MessageService
+    private val messageService: MessageService
 ) {
 
     @GetMapping("/hello")
@@ -16,9 +16,9 @@ class MessageController(
 
     @PostMapping("/message")
     fun sendMessage(
-        @RequestBody message: Message
-    ): Message {
-        return messageService.sendMessage(message)
+        @RequestBody messageRequest: MessageRequest
+    ): MessageRequest {
+        return messageService.sendMessage(messageRequest)
     }
 
     @GetMapping("/message/sender/{senderId}/recipient/{recipientId}")
@@ -26,7 +26,7 @@ class MessageController(
         @PathVariable senderId: String,
         @PathVariable recipientId: String,
         @RequestAttribute limit: Boolean
-    ) : List<Message> {
+    ) : List<MessageRequest> {
         return messageService.getMessageBySenderForRecipient(senderId,recipientId,limit)
     }
 
@@ -34,14 +34,14 @@ class MessageController(
     fun getMessageBySender(
         @PathVariable senderId: String,
         @RequestAttribute limit: Boolean
-    ) : List<Message> {
+    ) : List<MessageRequest> {
         return messageService.getMessageBySender(senderId,limit)
     }
 
     @GetMapping("/message")
     fun getAllMessages(
         @RequestAttribute limit: Boolean
-    ): List<Message>{
+    ): List<MessageRequest>{
         return messageService.getAllMessages(limit)
     }
 

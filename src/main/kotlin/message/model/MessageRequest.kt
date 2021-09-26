@@ -1,6 +1,6 @@
 package message.model
 
-data class Message(
+data class MessageRequest (
     val senderId: String,
     val recipientId: String,
     val content: String
