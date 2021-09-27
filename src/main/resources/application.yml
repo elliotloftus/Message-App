@@ -1,0 +1,6 @@
+spring:
+  data:
+    mongodb:
+      database: message-app
+      host: mongo-message-app
+      port: 27017
