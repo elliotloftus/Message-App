@@ -10,9 +10,9 @@ class MessageController(
     private val messageService: MessageService
 ) {
 
-    @GetMapping("/hello")
+    @GetMapping("/")
     fun placeholderHello(): String {
-        return "Hello"
+        return "Hello, and welcome to my app"
     }
 
     @PostMapping("/message")
