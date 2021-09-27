@@ -1,5 +1,6 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://rootuser:rootpass@message-app.vfzyu.mongodb.net/message-app?retryWrites=true&w=majority
-
+      database: message-app
+      host: mongo-message-app
+      port: 27017

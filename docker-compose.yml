@@ -1,0 +1,14 @@
+version: "3"
+services:
+  mongo-message-db:
+    image: mongo:latest
+    container_name: "mongo-message-app"
+    ports:
+      - 27017:27017
+  messenger-app:
+    image: elliot-message-app:2.0
+    container_name: messneger-app
+    ports:
+      - 8080:8080
+    links:
+      - mongo-message-db
