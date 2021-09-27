@@ -59,8 +59,8 @@ class MessageRepository(
         return if (limit) {
             Query().addCriteria(queryCriteria).limit(LIMIT_SIZE)
         } else {
-            queryCriteria.and(Instant.now().toString())
-                .gte(Instant.now().minus(1,ChronoUnit.MONTHS))
+            queryCriteria.and(SENT_AT)
+                .gte(Instant.now().minus(DAYS_IN_MONTH,ChronoUnit.DAYS).toString())
             Query().addCriteria(queryCriteria)
         }
     }
@@ -72,5 +72,6 @@ class MessageRepository(
         const val SENT_AT = "sent_at"
         const val CONTENT = "content"
         const val LIMIT_SIZE = 100
+        const val DAYS_IN_MONTH: Long = 30
     }
 }
