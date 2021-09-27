@@ -41,7 +41,7 @@ class MessageController(
 
     @GetMapping("/message")
     fun getAllMessages(
-        @RequestAttribute limit: Boolean
+        @RequestParam limit: Boolean
     ): List<MessageDocument> {
         return messageService.getAllMessages(limit)
     }
