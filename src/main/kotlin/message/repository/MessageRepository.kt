@@ -55,7 +55,7 @@ class MessageRepository(
     private fun buildQueryForLimitOrRecentMessages(limit: Boolean, queryCriteria: Criteria): Query {
 
         //If limit, set query to limits by 100 (limit_size)
-        //if not limit, add to criteria to make sure we only get last month of messages
+        //if not limit, add to criteria to make sure we only get last month (30 days) of messages
         return if (limit) {
             Query().addCriteria(queryCriteria).limit(LIMIT_SIZE)
         } else {

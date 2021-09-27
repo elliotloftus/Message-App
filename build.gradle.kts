@@ -22,6 +22,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation ("org.springframework.boot:spring-boot-starter-data-mongodb")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("com.github.fakemongo:fongo:2.1.0")
 }
 
 tasks.withType<KotlinCompile> {
