@@ -1,5 +1,14 @@
 # message-app
 
+## Running Locally 💯
+This service runs in docker. If you do not have docker downloaded yet, please follow directions at:
+[Docker](https://docs.docker.com/get-docker/).
+
+Run the following:
+`docker-compose up --build`
+
+## API Endpoints 
+
 This is a simple enough messaging app with the following endpoints
 
 1. POST ```/messages```
