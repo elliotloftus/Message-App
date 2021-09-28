@@ -25,20 +25,23 @@ This is a simple enough messaging app with the following endpoints
     ```
     Example screenshot below of Post man call can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Post-example.png)
 
-2. Get messages by sender for a recepient
-    GET /messages/sender/{messageId}/recipient/{recipientId}?limit={boolean}
+2. Get messages by sender for a recepient               
+    GET ```/messages/sender/{messageId}/recipient/{recipientId}?limit={boolean}```
 
-    Returns all messages by sender for a recipient. If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days
-    Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-message-by-recipient-and-sender.png)
+    ⋅*Returns all messages by sender for a recipient.         
+    ⋅*If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days                   
+    ⋅Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-message-by-recipient-and-sender.png)
 
-3. Get messages for a recepient
-    GET /messages/recipient/{recipientId}?limit={boolean}
+3. Get messages for a recepient              
+    GET ```/messages/recipient/{recipientId}?limit={boolean}```
 
-    Returns all messages for a recipient. If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days
-    Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-message-by-recipient.png)
+    ⋅*Returns all messages for a recipient.         
+    ⋅*If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days                   
+    ⋅Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-message-by-recipient.png)
 
-4. Get all messages
-    GET /messages?limit={boolean}
-
-    Returns all messages. If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days
-    Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-All-messages.png)
+4. Get all messages             
+   GET ```/messages?limit={boolean}```
+   
+    ⋅*Returns all messages for a recipient.         
+    ⋅*If limit = true, returns a max of 100 messages, otherwise returns messages withing the last 30 days                   
+    ⋅Example screenshot below of Post man call and response can be found [here](https://github.com/elliotloftus/message-app/blob/main/postmanScreenshots/Get-All-messages.png)
