@@ -5,7 +5,7 @@ This service runs in docker. If you do not have docker downloaded yet, please fo
 [Docker](https://docs.docker.com/get-docker/).
 
 Run the following:
-`docker-compose up --build`
+`docker-compose up`
 
 Once the service is running, check out the api endpoints below for how to save and retrieve messages
 
